@@ -13,8 +13,8 @@ import { SkyPageModule } from '@skyux/layout';
 
 import { ModalNewUserComponent } from '../User/modal-new.component';
 import { UserDataService } from '../../Services/userDataService';
-import { User, iUser } from '../../Models/User';
-import { ModalNewContext } from './modal-new.context';
+import { User, Users } from '../../Models/User';
+import { ModalNewContextComponent } from './modal-new.context';
 import { GridContextMenuComponent } from './grid-context-menu.component';
 
 @Component({
@@ -28,7 +28,7 @@ import { GridContextMenuComponent } from './grid-context-menu.component';
   imports: [
     CommonModule
   ],
-  exports:[
+  exports: [
     SkyPageModule
   ],
   providers: [
@@ -37,40 +37,7 @@ import { GridContextMenuComponent } from './grid-context-menu.component';
 })
 
 export class GridComponent implements OnInit {
-  private getAll(){
-    this._userDataService.getAllUsers().subscribe(
-      response => {
-        this.gridData = response;
-      }
-      ,error => alert(JSON.stringify(error))
-    );
-  }
-
-  private saveUser(user: User){
-    this._userDataService.createNew(user).subscribe(
-      response => {
-        console.log(response);
-      }
-      ,error => alert(JSON.stringify(error))
-      );
-  }
-
-  constructor(
-    private agGridService: SkyAgGridService,
-    private modalService: SkyModalService,
-    private _userDataService: UserDataService
-    ) { }
-
-  ngOnInit(): void {
-    this.gridOptions = {
-      columnDefs: this.columnDefs,
-      onGridReady: gridReadyEvent => this.onGridReady(gridReadyEvent)
-    };
-    this.gridOptions = this.agGridService.getGridOptions({ gridOptions: this.gridOptions });
-    this.getAll();
-  }
-
-  public gridData = [] as Array<iUser>;
+  public gridData = [] as Array<Users>;
   public columnDefs = [
     {
       field: 'firstName',
@@ -111,8 +78,15 @@ export class GridComponent implements OnInit {
     columnDefs: this.columnDefs,
     onGridReady: gridReadyEvent => this.onGridReady(gridReadyEvent)
   };
-  public searchText: string = "";
+  public searchText: string = '';
   public modalSize: string = 'large';
+
+  constructor(
+    private agGridService: SkyAgGridService,
+    private modalService: SkyModalService,
+    private _userDataService: UserDataService
+    ) { }
+
   public onGridReady(gridReadyEvent: GridReadyEvent): void {
     this.gridApi = gridReadyEvent.api;
     this.gridApi.sizeColumnsToFit();
@@ -120,12 +94,12 @@ export class GridComponent implements OnInit {
 
   public onOpenModalClick(): void {
     const modalInstanceType: any = ModalNewUserComponent;
-    const context = new ModalNewContext();
-    context.userModel = new User(0,"","","","","","");
+    const context = new ModalNewContextComponent();
+    context.userModel = new User(0, '', '', '', '', '', '');
 
     const options = {
-      providers: [{ provide: ModalNewContext, useValue: context }],
-      data: new User(0,"","","","","",""),
+      providers: [{ provide: ModalNewContextComponent, useValue: context }],
+      data: new User(0, '', '', '', '', '', ''),
       size: this.modalSize
     };
 
@@ -148,6 +122,33 @@ export class GridComponent implements OnInit {
   }
 
   public gridUpdate(): void {
-    alert("gridupate");
+    alert('gridupate');
+  }
+
+  public ngOnInit(): void {
+    this.gridOptions = {
+      columnDefs: this.columnDefs,
+      onGridReady: gridReadyEvent => this.onGridReady(gridReadyEvent)
+    };
+    this.gridOptions = this.agGridService.getGridOptions({ gridOptions: this.gridOptions });
+    this.getAll();
+  }
+
+  private getAll() {
+    this._userDataService.getAllUsers().subscribe(
+      response => {
+        this.gridData = response;
+      }
+      , error => alert(JSON.stringify(error))
+    );
+  }
+
+  private saveUser(user: User) {
+    this._userDataService.createNew(user).subscribe(
+      response => {
+        console.log(response);
+      }
+      , error => alert(JSON.stringify(error))
+      );
   }
 }

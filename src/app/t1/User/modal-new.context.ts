@@ -12,6 +12,6 @@ import {
   styleUrls: ['./modal-new.component.scss']
 })
 
-export class ModalNewContext {
-  userModel = new User(0,"","","","","","");
+export class ModalNewContextComponent {
+  public userModel = new User(0, '', '', '', '', '', '');
 }

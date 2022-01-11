@@ -1,14 +1,14 @@
 import {
-  Component, NgModule
+  Component, NgModule, OnInit
 } from '@angular/core';
 
 import {
   SkyModalInstance
 } from '@skyux/modals';
 
-import { iUser, User } from '../../Models/User';
-import { UserDataService } from '../../Services/userDataService'
-import { ModalNewContext } from './modal-new.context'
+import { Users, User } from '../../Models/User';
+import { UserDataService } from '../../Services/userDataService';
+import { ModalNewContextComponent } from './modal-new.context';
 
 @Component({
   selector: 'app-modal-new',
@@ -20,16 +20,16 @@ import { ModalNewContext } from './modal-new.context'
   providers: [
     SkyModalInstance,
     UserDataService,
-    ModalNewContext
+    ModalNewContextComponent
   ]
 })
 
-export class ModalNewUserComponent{
-  userModel : iUser = new User(0,"","","","","","");
+export class ModalNewUserComponent implements OnInit {
+  public userModel: Users = new User(0, '', '', '', '', '', '');
 
   constructor(
     public instance: SkyModalInstance,
-    public context : ModalNewContext
+    public context: ModalNewContextComponent
   ) { }
 
   public ngOnInit(): void {

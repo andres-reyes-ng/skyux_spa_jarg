@@ -1,5 +1,5 @@
 import {
-  Component, EventEmitter, NgModule, Output
+  Component, NgModule
 } from '@angular/core';
 
 import {
@@ -24,9 +24,7 @@ import { UserDataService } from '../../Services/userDataService';
   ]
 })
 
-
-export class GridContextMenuComponent implements ICellRendererAngularComp{
-  @Output() gridUpdate: EventEmitter<any> = new EventEmitter<any>();
+export class GridContextMenuComponent implements ICellRendererAngularComp {
   private params: ICellRendererParams | undefined;
 
   constructor(
@@ -43,15 +41,12 @@ export class GridContextMenuComponent implements ICellRendererAngularComp{
   }
 
   public actionClicked(action: string): void {
-    this.gridUpdate.emit();
-
-    if (action === 'Delete2') {
+    if (action === 'Delete') {
       console.log('Delete Item');
       this.deleteAction(this.params?.value);
     } else if (action === 'Edit') {
       console.log('Edition starts!');
     }
-
   }
 
   private deleteAction(id: number): void {
@@ -59,8 +54,7 @@ export class GridContextMenuComponent implements ICellRendererAngularComp{
       response => {
         console.log(response);
       }
-      ,error => alert(JSON.stringify(error))
+      , error => alert(JSON.stringify(error))
     );
-    this.gridUpdate.emit();
   }
 }

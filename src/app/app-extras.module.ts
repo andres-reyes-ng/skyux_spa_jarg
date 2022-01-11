@@ -40,7 +40,7 @@ import { ModalNewUserComponent } from '../app/t1/User/modal-new.component';
 import { GridContextMenuComponent } from '../app/t1/User/grid-context-menu.component';
 
 @NgModule({
-  imports:[
+  imports: [
     AgGridModule.withComponents([])
   ],
   exports: [
