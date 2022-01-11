@@ -1,0 +1,114 @@
+<sky-modal>
+  <sky-modal-header>
+    Add employee information
+  </sky-modal-header>
+  <sky-modal-content class="sky-form-control">
+          <sky-input-box>
+            <label
+              class="sky-control-label sky-control-label-required"
+              for="firstName"
+            >
+            First Name
+            </label>
+            <input
+              class="sky-form-control"
+              id="firstName"
+              type="text"
+              aria-required="true"
+              required
+              boxFirstName
+              #boxFirstName
+              [(ngModel)]="context.userModel.firstName"
+            >
+          </sky-input-box>
+          <sky-input-box>
+            <label
+              class="sky-control-label sky-control-label-required"
+              for="lastName"
+            >
+            Last Name
+            </label>
+            <input
+              class="sky-form-control"
+              id="lastName"
+              type="text"
+              aria-required="true"
+              required
+              #boxLastName
+              [(ngModel)]="context.userModel.lastName"
+            >
+          </sky-input-box>
+
+          <sky-input-box>
+            <label
+              class="sky-control-label sky-control-label-required"
+              for="contactNo"
+            >
+            Contact Number
+            </label>
+            <input
+              class="sky-form-control"
+              id="contactNo"
+              type="text"
+              #boxContactNo
+              [(ngModel)]="context.userModel.contactNo"
+            >
+          </sky-input-box>
+
+          <sky-input-box>
+            <label
+              class="sky-control-label sky-control-label-required"
+              for="email"
+            >
+            Email
+            </label>
+            <input
+              class="sky-form-control"
+              id="email"
+              type="email"
+              #boxEmail
+              [(ngModel)]="context.userModel.email"
+            >
+          </sky-input-box>
+
+          <sky-input-box>
+            <label
+              class="sky-control-label sky-control-label-required"
+              for="birthDay"
+            >
+            Birth Day
+            </label>
+            <input
+              class="sky-form-control"
+              id="birthDay"
+              type="date"
+              #boxBirthDay
+              [(ngModel)]="context.userModel.birthDay"
+            >
+          </sky-input-box>
+
+          <sky-input-box>
+            <label
+              class="sky-control-label sky-control-label-required"
+              for="address"
+            >
+            address
+            </label>
+            <input
+              class="sky-form-control"
+              id="address"
+              type="text"
+              #boxAddress
+              [(ngModel)]="context.userModel.address"
+            >
+          </sky-input-box>
+  </sky-modal-content>
+  <sky-modal-footer>
+    <button class="sky-btn sky-btn-primary" type="button" (click)="instance.save()">
+      Save
+    </button>
+    <button class="sky-btn sky-btn-link" type="button" (click)="instance.close()">
+      Cancel
+    </button>
+  </sky-modal-footer>
+</sky-modal>
